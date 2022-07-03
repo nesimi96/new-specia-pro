@@ -1,0 +1,56 @@
+.productSlider {
+    margin: 20px 0;
+
+    &_header {
+        margin: 0 3%;
+
+        & h6 {
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+
+    &_holder {
+        padding: 0 5%;
+    }
+}
+
+.Slider {
+   
+    margin: 10% 0;
+    background-color: white;
+
+    &_imgHolder {
+        color: white;
+        height: 350px;
+        & img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &_headerAndPriceHolder{
+        display: flex;
+        font-size: 18px;
+    
+        &_header {
+           margin-left: 3%;
+           flex: 1;
+        }
+
+        &_price {
+            right: 5px;
+            margin-right: 3%
+        }
+    }
+    
+    &_utility {
+        border-bottom: 0.5px solid rgb(189, 189, 189);
+    }
+
+    &_textHolder {
+        padding: 3%;
+    }
+}
