@@ -11,17 +11,26 @@ const FilterNav = (props) => {
     const filters = ['Najskuplji', 'Najjeftiniji', 'Popusti', 'Najpopularniji', 'Svetski hitovi']
     const category = ['Deca', 'Kuhinja', 'Kupatilo', 'Bašta', 'Masažeri']
 
+    let paramsID = props.route.match.params.id
+
     let sorted = filters.map((cur, ind) => {
-        return <FilterFilters key={ind} val={cur} /> 
+
+        let active = cur.toLowerCase() === paramsID ? cur : null
+    
+        return <FilterFilters  key={ind} val={cur} paramsID={paramsID} active={active}
+         closeFilterNav={() => props.closeFilterNav()} changePath={() => props.changePath(cur)} /> 
     })
 
   
     let categorized = category.map((cur, ind) => {
-        return <FilterFilters key={ind} val={cur} />
+        
+        let active = cur.toLowerCase() === paramsID ? cur : null
+     
+        return <FilterFilters key={ind} paramsID={paramsID} active={active}
+        val={cur} closeFilterNav={() => props.closeFilterNav()} changePath={() => props.changePath(cur)} />
     })
 
     let navOpen = props.navOpen;
-    console.log(navOpen)
 
     return  <Transition in={navOpen} timeout={1000} mountOnEnter unmountOnExit>
             { state => (
@@ -31,10 +40,10 @@ const FilterNav = (props) => {
                     width: state === 'entered' ? '100%' : state === 'exiting' ? '0%' : '',
                     animation: state === 'entering' ? 'cartOpening .25s cubic-bezier(.45,.48,0,.97)' : 
                     state === 'exiting' ? 'cartClosing .25s cubic-bezier(.45,.48,0,.97)' : '',
-                 }} >
+                 }}  >
                         <div className='FilterNav-holder'>
                             <div className='FilterNav-holder-iconHolder'>
-                                <div className='FilterNav-holder-iconHolder-icon'> <gg-icon ><VscArrowRight style={style} /></gg-icon></div>
+                                <div onClick={() => props.closeFilterNav()}  className='FilterNav-holder-iconHolder-icon'> <gg-icon ><VscArrowRight style={style} /></gg-icon></div>
                             </div>
                             <div className='FilterNav-holder-header'>
                                 <p>Filtriraj:</p>
@@ -58,7 +67,7 @@ const FilterNav = (props) => {
                                 {categorized}
                             </div>
                         </div>
-                    </div>
+                </div>
             )}
            </Transition>
 }
